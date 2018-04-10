@@ -16,7 +16,7 @@ FROM pg_stat_user_tables
 ORDER BY n_live_tup DESC;
 ```
 
-### 20 slowest queries
+## 20 slowest queries
 
 ```
 SELECT  query,
@@ -30,13 +30,13 @@ ORDER BY total_time DESC
 LIMIT 20;
 ```
 
-### Table stats (reads, writes, updates) for specified tables (relname)
+## Table stats (reads, writes, updates) for specified tables (relname)
 
 ```
 select * from pg_stat_all_tables where relname IN ('users', 'trips', 'trip_templates', 'vehicles', 'invitations', 'service_areas', 'country_codes', 'user_privacy_options', 'privacy_options');
 ```
 
-### Currently running queries (runtime longer than 500ms)
+## Currently running queries (runtime longer than 500ms)
 
 ```
 SELECT now() - query_start as "runtime", query, client_addr, client_port, client_hostname, query_start
