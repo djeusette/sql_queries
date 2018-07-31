@@ -44,3 +44,16 @@ FROM  pg_stat_activity
 WHERE now() - query_start > '500 milliseconds'::interval
 ORDER BY runtime DESC;
 ```
+
+## Unused Indexes
+
+```
+SELECT
+	PSUI.indexrelid::regclass AS IndexName
+	,PSUI.relid::regclass AS TableName
+FROM pg_stat_user_indexes AS PSUI    
+JOIN pg_index AS PI 
+    ON PSUI.IndexRelid = PI.IndexRelid
+WHERE PSUI.idx_scan = 0 
+	AND PI.indisunique IS FALSE;
+```
